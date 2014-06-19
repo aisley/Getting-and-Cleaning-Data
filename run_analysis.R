@@ -26,7 +26,7 @@ TestData<-read.table("./data/UCI HAR Dataset/test/X_test.txt", header=FALSE)
 names(TrainData) <- names(ColumnNames) 
 names(TestData) <- names(ColumnNames) 
 
-#Combine all the data
+#Combine all into a single data set
 AllData<-rbind(TestData, TrainData)
 
 #clean up the memory
@@ -34,5 +34,5 @@ rm(TestData)
 rm(TrainData)
 rm(ColumnNames)
 
-#test change
-
+#Get only the columns taht contain Standard Deviation and Mean
+df1 <- AllData[ , grep( "-mean\\(\\)|std" , names(AllData) ) ]
