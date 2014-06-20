@@ -86,7 +86,14 @@ x<-melt(FinalData, id=c("TestSubjectId", "ActivityDesc"), measure.vars=ColNames)
 TidyData<-dcast(x, TestSubjectId + ActivityDesc ~ variable, mean)
 
 
-colnames(TidyData)<- (c("TestSubjectId", "ActivityDesc", "avg_tBodyAcc-mean()-X","avg_tBodyAcc-mean()-Y", "avg_tBodyAcc-mean()-Z", "avg_tBodyAcc-std()-X", "avg_tBodyAcc-std()-Y", "avg_tBodyAcc-std()-Z", "avg_tGravityAcc-mean()-X", "avg_tGravityAcc-mean()-Y", "avg_tGravityAcc-mean()-Z", "avg_tGravityAcc-std()-X", "avg_tGravityAcc-std()-Y", "avg_tGravityAcc-std()-Z", "avg_tBodyAccJerk-mean()-X", "avg_tBodyAccJerk-mean()-Y", "avg_tBodyAccJerk-mean()-Z", "avg_tBodyAccJerk-std()-X", "avg_tBodyAccJerk-std()-Y", "avg_tBodyAccJerk-std()-Z", "avg_tBodyGyro-mean()-X" , "avg_tBodyGyro-mean()-Y", "avg_tBodyGyro-mean()-Z" , "avg_tBodyGyro-std()-X", "avg_tBodyGyro-std()-Y", "avg_tBodyGyro-std()-Z", "avg_tBodyGyroJerk-mean()-X", "avg_tBodyGyroJerk-mean()-Y", "avg_tBodyGyroJerk-mean()-Z", "avg_tBodyGyroJerk-std()-X", "avg_tBodyGyroJerk-std()-Y", "avg_tBodyGyroJerk-std()-Z", "avg_tBodyAccMag-mean()" , "avg_tBodyAccMag-std()", "avg_tGravityAccMag-mean()", "avg_tGravityAccMag-std()", "avg_tBodyAccJerkMag-mean()", "avg_tBodyAccJerkMag-std()", "avg_tBodyGyroMag-mean()", "avg_tBodyGyroMag-std()" , "avg_tBodyGyroJerkMag-mean()", "avg_tBodyGyroJerkMag-std()", "avg_fBodyAcc-mean()-X", "avg_fBodyAcc-mean()-Y", "avg_fBodyAcc-mean()-Z", "avg_fBodyAcc-std()-X" , "avg_fBodyAcc-std()-Y", "avg_fBodyAcc-std()-Z" , "avg_fBodyAccJerk-mean()-X", "avg_fBodyAccJerk-mean()-Y", "avg_fBodyAccJerk-mean()-Z", "avg_fBodyAccJerk-std()-X", "avg_fBodyAccJerk-std()-Y", "avg_ffBodyAccJerk-std()-Z", "avg_ffBodyGyro-mean()-X"  , "avg_ffBodyGyro-mean()-Y"  , "avg_ffBodyGyro-mean()-Z", "avg_fBodyGyro-std()-X", "avg_fBodyGyro-std()-Y", "avg_fBodyGyro-std()-Z", "avg_fBodyAccMag-mean()"  , "avg_ffBodyAccMag-std()", "avg_fBodyBodyAccJerkMag-mean()", "avg_fBodyBodyAccJerkMag-std()" , "avg_fBodyBodyGyroMag-mean()"   , "avg_fBodyBodyGyroMag-std()"    , "avg_fBodyBodyGyroJerkMag-mean()", "avg_fBodyBodyGyroJerkMag-std()" ))
+#Clean up the Column Names
+names(TidyData) <- gsub("mean", "Mean", names(TidyData)) # capitalize M
+names(TidyData) <- gsub("std", "Std", names(TidyData)) # capitalize S
+names(TidyData) <- gsub("tBody", "Avg_tBody", names(TidyData)) # Add Avg in the front
+names(TidyData) <- gsub("tGravity", "Avg_tGravity", names(TidyData)) # Add Avg in the front
+names(TidyData) <- gsub("fGravity", "Avg_Gravity", names(TidyData)) # Add Avg in the front
+names(TidyData) <- gsub("fBody", "Avg_fBody", names(TidyData)) # Add Avg in the front
+
 
 #Write the TidayDate set out
 write.table(TidyData, file="./Getting-and-Cleaning-Data/AvgHumanActivity.txt", col.names=TRUE, row.names = FALSE, sep = " ")
