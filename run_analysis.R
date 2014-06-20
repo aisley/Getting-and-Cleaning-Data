@@ -96,7 +96,7 @@ names(TidyData) <- gsub("fBody", "Avg_fBody", names(TidyData)) # Add Avg in the 
 
 
 #Write the TidayDate set out
-write.table(TidyData, file="./Getting-and-Cleaning-Data/AvgHumanActivity.txt", col.names=TRUE, row.names = FALSE, sep = " ")
+write.table(TidyData, file="./Getting-and-Cleaning-Data/AvgHumanActivity.txt", col.names=TRUE, row.names = FALSE, sep = "", quote= FALSE)
 
 rm(AllData)
 rm(FinalData)
