@@ -34,7 +34,8 @@ You should create one R script called run_analysis.R that does the following.
 7. Results will be saved in the working directory.
 
 ##Output Results
-HumanActivity.txt - Contains the base data set after data has been cleaned
+HumanActivity.txt - Contains the base data set after data has been cleaned.
+
 AvgHumanActivity.txt - Contains the avg of each measure for each TestSubject and Activity
 
 
