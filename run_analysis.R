@@ -1,8 +1,15 @@
 run_analysis <- function(directory) {
-
-
-#Get the column headers File
+#    Provide a tidy data set for future analysis of Human Activity as it was recorded by a smartphones accelerometer and gyroscope.  
+#    Each participant attached their smartphone to their waste as they carrier out daily activites.  For additional information on 
+#    the beginning data set see: [http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones](http://)
      
+#    For the purpose of this analysis,  std(): Standard deviation and mean(): Mean value were extracted from the original source 
+#    along with test subject and Activity.  The meanFreq()(Weighted average of the frequency components to obtain a mean frequency) 
+#    has been excluded from the resultset as it was not necessary for our analysis.
+ 
+     
+#Get the column headers File
+
 CHFile<-paste(directory,"\\UCI HAR Dataset\\","features.txt", sep="")
 #=directory"features.txt"
 #file<-paste(directory,"\\",Filename,".csv", sep="")
