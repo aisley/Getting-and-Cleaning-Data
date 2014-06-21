@@ -24,10 +24,18 @@ You should create one R script called run_analysis.R that does the following.
 4. Appropriately labels the data set with descriptive variable names.
 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-##Steps to Reproduct Results
-
-
+##Steps to Reproduce Results
+1. Install the reshape2 library: install.packages("reshape2")
+2. Load the reshape2 library: library("reshape2")
+3. Create a working directory for the results.
+4. Download the run_analysis.r into the working directory
+5. Download the data set [https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](http:///) and unzip it into the working directory.
+6. exec the run_analysis(directory) functions passing in the Working Directory location.  run_analysis("c:\\Data Science\\3 - Getting and Cleaning Data\\Project\\Data")
+7. Results will be saved in the working directory.
 
 ##Output Results
+HumanActivity.txt - Contains the base data set after data has been cleaned
+AvgHumanActivity.txt - Contains the avg of each measure for each TestSubject and Activity
 
 
+[1]: Getting and Cleaning Data by Jeff Leek, PhD, Roger D. Peng, PhD, Brian Caffo, PhD

@@ -1,5 +1,11 @@
+run_analysis <- function(directory) {
+
+
 #Get the column headers File
-CHFile="./Data/UCI HAR Dataset/features.txt"
+     
+CHFile<-paste(directory,"\\UCI HAR Dataset\\","features.txt", sep="")
+#=directory"features.txt"
+#file<-paste(directory,"\\",Filename,".csv", sep="")
 
 #Read the Column Headers 2nd column will contain the Columnnames
 ColumnHeaders<-read.csv(CHFile, header=FALSE, sep=" ")
@@ -27,13 +33,21 @@ rm(ColumnHeaders)
 rm(temprow)
 rm(CHFile)
 
+#Set teh File names for each file
+TestSubjectsFile<-paste(directory,"\\UCI HAR Dataset\\test\\subject_test.txt", sep="")
+TrainSubjectsFile<-paste(directory,"\\UCI HAR Dataset\\train\\subject_train.txt", sep="")
+TrainDataFile<-paste(directory,"\\UCI HAR Dataset\\train\\X_train.txt", sep="")
+TestDataFile<-paste(directory,"\\UCI HAR Dataset\\test\\X_test.txt", sep="")
+TrainActivityFile<-paste(directory,"\\UCI HAR Dataset\\train\\y_train.txt", sep="")
+TestActivityFile<-paste(directory,"\\UCI HAR Dataset\\test\\y_test.txt", sep="")
+
 #load the Test File
-TrainTestSubjects<-read.table("./data/UCI HAR Dataset/train/subject_train.txt", header=FALSE)
-TrainActivity<-read.table("./data/UCI HAR Dataset/train/y_train.txt", header=FALSE)
-TrainData<-read.table("./data/UCI HAR Dataset/train/X_train.txt", header=FALSE)
-TestTestSubjects<-read.table("./data/UCI HAR Dataset/test/subject_test.txt", header=FALSE)
-TestActivity<-read.table("./data/UCI HAR Dataset/test/y_test.txt", header=FALSE)
-TestData<-read.table("./data/UCI HAR Dataset/test/X_test.txt", header=FALSE)
+TrainTestSubjects<-read.table(TrainSubjectsFile, header=FALSE)
+TrainActivity<-read.table(TrainActivityFile, header=FALSE)
+TrainData<-read.table(TrainDataFile, header=FALSE)
+TestTestSubjects<-read.table(TestSubjectsFile, header=FALSE)
+TestActivity<-read.table(TestActivityFile, header=FALSE)
+TestData<-read.table(TestDataFile, header=FALSE)
 
 #Rename the Activity and TestSubject Columns
 colnames(TrainTestSubjects)<-c("TestSubjectID")
@@ -43,7 +57,8 @@ colnames(TestActivity)<-c("ActivityID")
 
 
 #Get the Data set to classify the activity by name
-Activity<-read.table("./data/UCI HAR Dataset/activity_labels.txt", header=FALSE)
+ActLabelsFile<-paste(directory,"\\UCI HAR Dataset\\activity_labels.txt", sep="")
+Activity<-read.table(ActLabelsFile, header=FALSE)
             
 
 #Cbind the Test Subjects and Activitys to the test and Traing DF
@@ -73,7 +88,8 @@ rm(Activity)
 
 #Get all the columns we need for the final data Set
 FinalData<-AllData[ , grep( "-mean\\(\\)|std|TestSubjectId|ActivityDesc" , names(AllData) ) ]
-write.table(FinalData, file="./Getting-and-Cleaning-Data/HumanActivity.txt", col.names=TRUE, row.names = FALSE, sep = " ")
+CleanDataFile<-paste(directory,"\\HumanActivity.txt", sep="")
+write.table(FinalData, file=CleanDataFile, col.names=TRUE, row.names = FALSE, sep = " ")
 
 
 #Get the Measure Names
@@ -96,11 +112,12 @@ names(TidyData) <- gsub("fBody", "Avg_fBody", names(TidyData)) # Add Avg in the 
 
 
 #Write the TidayDate set out
-write.table(TidyData, file="./Getting-and-Cleaning-Data/AvgHumanActivity.txt", col.names=TRUE, row.names = FALSE, sep = "", quote= FALSE)
+TidyDataFile<-paste(directory,"\\AvgHumanActivity.txt", sep="")
+write.table(TidyData, file=TidyDataFile, col.names=TRUE, row.names = FALSE, sep = "", quote= FALSE)
 
 rm(AllData)
 rm(FinalData)
 rm(x)
 rm(TidyData)
 rm(ColNames)
-
+}
